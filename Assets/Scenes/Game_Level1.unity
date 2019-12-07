@@ -2491,6 +2491,8 @@ GameObject:
   - component: {fileID: 929598124}
   - component: {fileID: 929598127}
   - component: {fileID: 929598128}
+  - component: {fileID: 929598129}
+  - component: {fileID: 929598130}
   m_Layer: 0
   m_Name: PlayerShip
   m_TagString: Player
@@ -2611,9 +2613,40 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Player: {fileID: 929598123}
+  sliThruster: {fileID: 1045511927}
   leftPressed: 0
   rightPressed: 0
-  rotationSpeed: 200
+  MaxSpeed: 8
+--- !u!114 &929598129
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 929598123}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0453631411f7c44e87b4f2cb70c6256, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Player: {fileID: 929598123}
+  thrust: 10
+  MaxSpeed: 8
+--- !u!114 &929598130
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 929598123}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2dd927761dead3e4d8a91e7160da5281, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  firepoint: {fileID: 2022539067}
+  projectile: {fileID: 7913088838597401503, guid: a2dd693a9f49c7943b73e1fdf844c514,
+    type: 3}
 --- !u!1 &946504413
 GameObject:
   m_ObjectHideFlags: 0

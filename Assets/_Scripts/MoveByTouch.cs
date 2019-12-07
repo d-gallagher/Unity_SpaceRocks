@@ -1,17 +1,23 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class MoveByTouch : MonoBehaviour
 {
     public GameObject Player;
+    public Slider sliThruster;
 
     public bool leftPressed;
     public bool rightPressed;
     private float rotationSpeed = 200f;
+    public float MaxSpeed = 8f;
+    //public float thrust;
 
     void FixedUpdate()
     {
+        ControlRocket();
+
         if (leftPressed && !rightPressed)
         {
             RotateLeft();
@@ -22,7 +28,25 @@ public class MoveByTouch : MonoBehaviour
         }
     }
 
+    private float GetThrust(Slider s)
+    {
+        //thrust = s.value;
+        return s.value;
+    }
 
+    private void ControlRocket()
+    {
+        //Player.transform.Rotate(0, 0, Input.GetAxis("Horizontal") * rotationSpeed * Time.deltaTime);
+        //Player.GetComponent<Rigidbody2D>().AddForce(transform.up * thrust * Input.GetAxis("Vertical"));
+        //Player.GetComponent<Rigidbody2D>().velocity = new Vector2(Mathf.Clamp(Player.GetComponent<Rigidbody2D>().velocity.x, -MaxSpeed, MaxSpeed),
+        //    Mathf.Clamp(Player.GetComponent<Rigidbody2D>().velocity.y, -MaxSpeed, MaxSpeed));
+        Player.GetComponent<Rigidbody2D>().AddForce(transform.up * GetThrust(sliThruster));
+        Player.GetComponent<Rigidbody2D>().velocity = new Vector2(Mathf.Clamp(Player.GetComponent<Rigidbody2D>().velocity.x, -MaxSpeed, MaxSpeed), 
+            Mathf.Clamp(Player.GetComponent<Rigidbody2D>().velocity.y, -MaxSpeed, MaxSpeed));
+
+
+
+    }
 
     #region == Rotation ==
 

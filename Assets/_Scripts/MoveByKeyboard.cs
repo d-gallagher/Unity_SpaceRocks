@@ -1,10 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class MoveByKeyboard : MonoBehaviour
 {
     public GameObject Player;
+    //public Slider sliThruster;
 
     public float thrust = 10f;
     private float rotationSpeed = 200f;
@@ -23,4 +25,9 @@ public class MoveByKeyboard : MonoBehaviour
             Mathf.Clamp(Player.GetComponent<Rigidbody2D>().velocity.y, -MaxSpeed, MaxSpeed));
 
     }
+
+    //private float GetThrust(Slider s)
+    //{
+    //    return s.value;
+    //}
 }

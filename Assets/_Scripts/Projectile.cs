@@ -13,8 +13,8 @@ public class Projectile : MonoBehaviour
         KillOldBullet();
     }
 
-    void OnTriggerEnter2D(Collider2D hitInfo){
-
+    void OnTriggerEnter2D(Collider2D hitInfo)
+    {
         Debug.Log(hitInfo.name);
         Destroy(gameObject);
     }

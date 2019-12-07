@@ -8,8 +8,6 @@ public class Asteroid : MonoBehaviour
     public GameObject asteroid;
     // Rotation values
     private float maxRotation;
-    private float rotationX;
-    private float rotationY;
     private float rotationZ;
     private Rigidbody2D rb;
     private Camera mainCam;
@@ -23,8 +21,6 @@ public class Asteroid : MonoBehaviour
         mainCam = Camera.main;
 
         maxRotation = 25f;
-        // rotationX = Random.Range(-maxRotation, maxRotation);
-        // rotationY = Random.Range(-maxRotation, maxRotation);
         rotationZ = Random.Range(-maxRotation, maxRotation);
 
         rb = asteroid.GetComponent<Rigidbody2D>();
@@ -58,6 +54,13 @@ public class Asteroid : MonoBehaviour
         CheckPosition();
         float dynamicMaxSpeed = 3f;
         rb.velocity = new Vector2(Mathf.Clamp(rb.velocity.x, -dynamicMaxSpeed, dynamicMaxSpeed), Mathf.Clamp(rb.velocity.y, -dynamicMaxSpeed, dynamicMaxSpeed));
+    }
+
+    void OnTriggerEnter2D(Collider2D hitInfo)
+    {
+        //if(hitInfo.name.Equals("Projectile")
+        Debug.Log(hitInfo.name);
+        //Destroy(gameObject);
     }
 
     void OnCollisionEnter(Collision collisionInfo)
