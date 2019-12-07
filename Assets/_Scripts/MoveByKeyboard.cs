@@ -6,11 +6,15 @@ using UnityEngine.UI;
 public class MoveByKeyboard : MonoBehaviour
 {
     public GameObject Player;
-    //public Slider sliThruster;
-
+    Rigidbody2D rb;
     public float thrust = 10f;
     private float rotationSpeed = 200f;
     public float MaxSpeed = 8f;
+
+    private void Start()
+    {
+        rb = Player.GetComponent<Rigidbody2D>();
+    }
 
     private void FixedUpdate()
     {
@@ -20,14 +24,10 @@ public class MoveByKeyboard : MonoBehaviour
     private void ControlRocket()
     {
         Player.transform.Rotate(0, 0, Input.GetAxis("Horizontal") * rotationSpeed * Time.deltaTime);
-        Player.GetComponent<Rigidbody2D>().AddForce(transform.up * thrust * Input.GetAxis("Vertical"));
-        Player.GetComponent<Rigidbody2D>().velocity = new Vector2(Mathf.Clamp(Player.GetComponent<Rigidbody2D>().velocity.x, -MaxSpeed, MaxSpeed), 
-            Mathf.Clamp(Player.GetComponent<Rigidbody2D>().velocity.y, -MaxSpeed, MaxSpeed));
+        rb.AddForce(transform.up * thrust * Input.GetAxis("Vertical"));
+        rb.velocity = new Vector2(Mathf.Clamp(rb.velocity.x, -MaxSpeed, MaxSpeed), 
+            Mathf.Clamp(rb.velocity.y, -MaxSpeed, MaxSpeed));
 
     }
 
-    //private float GetThrust(Slider s)
-    //{
-    //    return s.value;
-    //}
 }

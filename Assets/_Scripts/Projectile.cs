@@ -15,12 +15,16 @@ public class Projectile : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D hitInfo)
     {
-        Debug.Log(hitInfo.name);
-        Destroy(gameObject);
+        if (hitInfo.CompareTag("asteroid"))
+        {
+            Debug.Log("Bullet Impact Asteroid: "+hitInfo.name);
+            Destroy(gameObject);
+            Destroy(hitInfo.gameObject);
+        }
     }
   
       public void KillOldBullet()
     {
-        Destroy(gameObject, 5.0f);
+        Destroy(gameObject, 2.5f);
     }
 }

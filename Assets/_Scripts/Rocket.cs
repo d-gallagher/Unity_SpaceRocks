@@ -7,9 +7,6 @@ using UnityEngine.UI;
 public class Rocket : MonoBehaviour
 {
 
-    public Slider sliThruster;
-    
-    public float MaxSpeed = 8f;
     private Camera mainCam;
     public Rigidbody2D rb;
 
@@ -21,11 +18,6 @@ public class Rocket : MonoBehaviour
     private void FixedUpdate()
     {
         CheckPosition();
-    }
-
-    private float GetThrust(Slider s)
-    {
-        return s.value;
     }
 
     private void CheckPosition()
@@ -61,5 +53,8 @@ public class Rocket : MonoBehaviour
         }
     }
 
- 
+    private void OnCollisionEnter(Collision collision)
+    {
+        Destroy(collision.gameObject);
+    }
 }

@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class MoveByTouch : MonoBehaviour
 {
     public GameObject Player;
+    Rigidbody2D rb;
     public Slider sliThruster;
 
     public bool leftPressed;
@@ -13,6 +14,11 @@ public class MoveByTouch : MonoBehaviour
     private float rotationSpeed = 200f;
     public float MaxSpeed = 8f;
     //public float thrust;
+
+    private void Start()
+    {
+        rb = Player.GetComponent<Rigidbody2D>();
+    }
 
     void FixedUpdate()
     {
@@ -36,16 +42,9 @@ public class MoveByTouch : MonoBehaviour
 
     private void ControlRocket()
     {
-        //Player.transform.Rotate(0, 0, Input.GetAxis("Horizontal") * rotationSpeed * Time.deltaTime);
-        //Player.GetComponent<Rigidbody2D>().AddForce(transform.up * thrust * Input.GetAxis("Vertical"));
-        //Player.GetComponent<Rigidbody2D>().velocity = new Vector2(Mathf.Clamp(Player.GetComponent<Rigidbody2D>().velocity.x, -MaxSpeed, MaxSpeed),
-        //    Mathf.Clamp(Player.GetComponent<Rigidbody2D>().velocity.y, -MaxSpeed, MaxSpeed));
-        Player.GetComponent<Rigidbody2D>().AddForce(transform.up * GetThrust(sliThruster));
-        Player.GetComponent<Rigidbody2D>().velocity = new Vector2(Mathf.Clamp(Player.GetComponent<Rigidbody2D>().velocity.x, -MaxSpeed, MaxSpeed), 
-            Mathf.Clamp(Player.GetComponent<Rigidbody2D>().velocity.y, -MaxSpeed, MaxSpeed));
-
-
-
+        rb.AddForce(transform.up * GetThrust(sliThruster));
+        rb.velocity = new Vector2(Mathf.Clamp(rb.velocity.x, -MaxSpeed, MaxSpeed), 
+            Mathf.Clamp(rb.velocity.y, -MaxSpeed, MaxSpeed));
     }
 
     #region == Rotation ==

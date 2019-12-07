@@ -58,14 +58,21 @@ public class Asteroid : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D hitInfo)
     {
-        //if(hitInfo.name.Equals("Projectile")
-        Debug.Log(hitInfo.name);
-        //Destroy(gameObject);
+        //if (hitInfo.CompareTag("projectile")){
+        //    Debug.Log("AsteroidDestroyedBy: " + hitInfo.name);
+        //    Destroy(gameObject);
+        //}
+        //if (hitInfo.CompareTag("Player"))
+        //{
+        //    Debug.Log("AsteroidToPlayerCollision: " + hitInfo.name);
+        //    //Reduce player life or destroy player..
+        //}
     }
 
     void OnCollisionEnter(Collision collisionInfo)
     {
-        if (collisionInfo.collider.name == "Projectile(Clone)")
+        if (collisionInfo.collider.name == "Projectile(Clone)" || 
+            collisionInfo.collider.name == "PlayerShip")
         {
             // if (_generation < 3)
             // {
