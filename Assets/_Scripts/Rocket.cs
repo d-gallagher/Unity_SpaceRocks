@@ -6,14 +6,9 @@ using UnityEngine.UI;
 
 public class Rocket : MonoBehaviour
 {
-    public Button btnLeft;
-    public Button btnRight;
+
     public Slider sliThruster;
-
-    bool rotateL;
-    bool rotateR;
-
-    float rotationSpeed = 1000f;
+    
     public float MaxSpeed = 8f;
     private Camera mainCam;
     public Rigidbody2D rb;
@@ -21,33 +16,11 @@ public class Rocket : MonoBehaviour
     private void Start()
     {
         mainCam = Camera.main;
-        Button btnL = btnLeft.GetComponent<Button>();
-        btnL.onClick.AddListener(RotateLeft);
-        Button btnR = btnRight.GetComponent<Button>();
-        btnR.onClick.AddListener(RotateRight);
-
-        rotateL = false;
-        rotateR = false;
     }
 
     private void FixedUpdate()
     {
-        ControlRocket();
         CheckPosition();
-    }
-
-    void Update()
-    {
-
-        if (rotateL)
-        {
-            RotateLeft();
-        }
-        else if (rotateR)
-        {
-            RotateRight();
-        }
-
     }
 
     private float GetThrust(Slider s)
@@ -55,45 +28,6 @@ public class Rocket : MonoBehaviour
         return s.value;
     }
 
-    private void ControlRocket()
-    {
-        rb.AddForce(transform.up * GetThrust(sliThruster));
-        rb.velocity = new Vector2(Mathf.Clamp(rb.velocity.x, -MaxSpeed, MaxSpeed), Mathf.Clamp(rb.velocity.y, -MaxSpeed, MaxSpeed));
-
-    }
-    #region == Rotation ==
-    void RotateLeft()
-    {
-        transform.Rotate(Vector3.back * rotationSpeed * Time.deltaTime);
-    }
-
-    public void StartRotateL()
-    {
-        rotateL = true;
-    }
-
-    public void StopRotateL()
-    {
-        rotateL = false;
-    }
-
-    void RotateRight()
-    {
-        transform.Rotate(Vector3.forward * rotationSpeed * Time.deltaTime);
-    }
-
-
-    public void StartRotateR()
-    {
-        rotateR = true;
-    }
-
-    public void StopRotateR()
-    {
-        rotateR = false;
-    }
-
-    #endregion
     private void CheckPosition()
     {
         // Set screen size

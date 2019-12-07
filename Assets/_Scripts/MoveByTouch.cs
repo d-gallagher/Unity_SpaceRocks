@@ -4,16 +4,46 @@ using UnityEngine;
 
 public class MoveByTouch : MonoBehaviour
 {
+    public GameObject Player;
 
+    public bool leftPressed;
+    public bool rightPressed;
+    private float rotationSpeed = 200f;
 
-    // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
-        if(Input.touchCount > 0){
-            Touch touch = Input.GetTouch(0);
-            Vector3 touchpos = Camera.main.ScreenToWorldPoint(touch.position);
-            touchpos.z = 0f;
-            transform.position = touchpos;
-        }    
+        if (leftPressed && !rightPressed)
+        {
+            RotateLeft();
+        }
+        else if (!leftPressed && rightPressed)
+        {
+            RotateRight();
+        }
     }
+
+
+
+    #region == Rotation ==
+
+    public void SetRightPressed(bool pressed)
+    {
+        rightPressed = pressed;
+    }
+
+    public void SetLeftPressed(bool pressed)
+    {
+        leftPressed = pressed;
+    }
+
+    void RotateRight()
+    {
+        Player.transform.Rotate(Vector3.forward * rotationSpeed * Time.deltaTime);
+    }
+
+    void RotateLeft()
+    {
+        Player.transform.Rotate(Vector3.back * rotationSpeed * Time.deltaTime);
+    }
+    #endregion
 }

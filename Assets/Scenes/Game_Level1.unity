@@ -2105,6 +2105,7 @@ GameObject:
   - component: {fileID: 780300296}
   - component: {fileID: 780300295}
   - component: {fileID: 780300294}
+  - component: {fileID: 780300297}
   m_Layer: 5
   m_Name: btnLeft
   m_TagString: Untagged
@@ -2210,6 +2211,46 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 780300292}
   m_CullTransparentMesh: 0
+--- !u!114 &780300297
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 780300292}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a8d6856cedb2c1b4da8ca9409c2b5387, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnButtonDown:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 929598128}
+        m_MethodName: SetLeftPressed
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+  OnButtonUp:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 929598128}
+        m_MethodName: SetLeftPressed
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &788530432
 GameObject:
   m_ObjectHideFlags: 0
@@ -2449,6 +2490,7 @@ GameObject:
   - component: {fileID: 929598125}
   - component: {fileID: 929598124}
   - component: {fileID: 929598127}
+  - component: {fileID: 929598128}
   m_Layer: 0
   m_Name: PlayerShip
   m_TagString: Player
@@ -2553,11 +2595,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67bc7e006b4964c4db93c6e803bfa142, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  btnLeft: {fileID: 780300294}
-  btnRight: {fileID: 1775856237}
   sliThruster: {fileID: 1045511927}
   MaxSpeed: 8
   rb: {fileID: 929598124}
+--- !u!114 &929598128
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 929598123}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fd19652a97961b24dbc6efc66d95c03f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Player: {fileID: 929598123}
+  leftPressed: 0
+  rightPressed: 0
+  rotationSpeed: 200
 --- !u!1 &946504413
 GameObject:
   m_ObjectHideFlags: 0
@@ -3645,6 +3701,7 @@ GameObject:
   - component: {fileID: 1775856239}
   - component: {fileID: 1775856238}
   - component: {fileID: 1775856237}
+  - component: {fileID: 1775856240}
   m_Layer: 5
   m_Name: btnRight
   m_TagString: Untagged
@@ -3750,6 +3807,46 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1775856235}
   m_CullTransparentMesh: 0
+--- !u!114 &1775856240
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1775856235}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a8d6856cedb2c1b4da8ca9409c2b5387, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnButtonDown:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 929598128}
+        m_MethodName: SetRightPressed
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+  OnButtonUp:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 929598128}
+        m_MethodName: SetRightPressed
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1792390673
 GameObject:
   m_ObjectHideFlags: 0
