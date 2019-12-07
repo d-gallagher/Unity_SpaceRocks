@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Weapon : MonoBehaviour
 {
-    public Transform firepoint;
+    public Transform firepoint = null;
     public GameObject projectile;
 
 
