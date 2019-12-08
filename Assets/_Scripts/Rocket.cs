@@ -23,6 +23,10 @@ public class Rocket : MonoBehaviour
     public Sprite fullStar;
     public Sprite emptyStar;
 
+    // Audio Clips for shooting and death
+    public AudioClip fireWeapon;
+    public AudioClip death;
+
     
     private void Start()
     {

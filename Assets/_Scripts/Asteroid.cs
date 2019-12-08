@@ -8,17 +8,24 @@ public class Asteroid : MonoBehaviour
     public GameObject asteroidMedium;
     public GameObject asteroidSmall;
     public Rigidbody2D rb;
+
     // Rotation values
     private float maxRotation;
     private float rotationZ;
     private Camera mainCam;
+
     // Points for killing asteroid
     private int asteroidPoints;
+
     // Reference to Player to send message with accrued score
     private GameObject Player;
 
     // Track if Large(3), Med(2), Small(1) Asteroid
     public int asteroidSize;
+
+    // Audio for asteroid explosion
+    AudioSource source;
+    bool explodeSound = false;
 
     void Start()
     {
@@ -26,6 +33,7 @@ public class Asteroid : MonoBehaviour
         MoveAsteroid();
         // Get reference to the Player
         Player = GameObject.FindGameObjectWithTag("Player");
+        source = GetComponent<AudioSource>();
     }
 
     void Update()
@@ -34,6 +42,10 @@ public class Asteroid : MonoBehaviour
         float dynamicMaxSpeed = 3f;
         rb.velocity = new Vector2(Mathf.Clamp(rb.velocity.x, -dynamicMaxSpeed, dynamicMaxSpeed), Mathf.Clamp(rb.velocity.y, -dynamicMaxSpeed, dynamicMaxSpeed));
         RotateAsteroid();
+        if (explodeSound)
+        {
+            ExplosionSound();
+        }
     }
 
     public void RotateAsteroid()
@@ -73,7 +85,7 @@ public class Asteroid : MonoBehaviour
         {
             // Destroy the projectile
             Destroy(hitInfo.gameObject);
-
+            explodeSound = true;
             // Check the size of the asteroid and split into smaller chunks
             if (asteroidSize == 3)
             {
@@ -99,6 +111,7 @@ public class Asteroid : MonoBehaviour
             Player.SendMessage("Score", GetAsteroidPoints());
 
             // Destroy the asteroid
+            explodeSound = false;
             Destroy(gameObject);
         }
 
@@ -123,6 +136,11 @@ public class Asteroid : MonoBehaviour
     private void SetAsteroidPoints(int points)
     {
         asteroidPoints = points;
+    }
+
+    private void ExplosionSound()
+    {        
+        source.Play();
     }
 
 }
