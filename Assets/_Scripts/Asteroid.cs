@@ -12,6 +12,10 @@ public class Asteroid : MonoBehaviour
     private float maxRotation;
     private float rotationZ;
     private Camera mainCam;
+    // Points for killing asteroid
+    private int asteroidPoints;
+    // Reference to Player to send message with accrued score
+    private GameObject Player;
 
     // Track if Large(3), Med(2), Small(1) Asteroid
     public int asteroidSize;
@@ -20,6 +24,15 @@ public class Asteroid : MonoBehaviour
     {
         mainCam = Camera.main;
         MoveAsteroid();
+        // Get reference to the Player
+        Player = GameObject.FindGameObjectWithTag("Player");
+    }
+
+    void Update()
+    {
+        // Give the asteroid a velocity
+        float dynamicMaxSpeed = 3f;
+        rb.velocity = new Vector2(Mathf.Clamp(rb.velocity.x, -dynamicMaxSpeed, dynamicMaxSpeed), Mathf.Clamp(rb.velocity.y, -dynamicMaxSpeed, dynamicMaxSpeed));
         RotateAsteroid();
     }
 
@@ -29,10 +42,11 @@ public class Asteroid : MonoBehaviour
         maxRotation = 25f;
         rotationZ = Random.Range(-maxRotation, maxRotation);
     }
+
     public void MoveAsteroid()
     {
         // asteroid velocity in x axis - select pos/neg direction - add force
-        float speedX = Random.Range(200f, 800f);
+        float speedX = Random.Range(200f, 400f);
         int selectorX = Random.Range(0, 2);
         float dirX = 0;
         if (selectorX == 1) { dirX = -1; }
@@ -41,7 +55,7 @@ public class Asteroid : MonoBehaviour
         rb.AddForce(transform.right * finalSpeedX);
 
         // asteroid velocity in y axis - select pos/neg direction - add force
-        float speedY = Random.Range(200f, 800f);
+        float speedY = Random.Range(200f, 400f);
         int selectorY = Random.Range(0, 2);
         float dirY = 0;
         if (selectorY == 1) { dirY = -1; }
@@ -50,16 +64,7 @@ public class Asteroid : MonoBehaviour
         rb.AddForce(transform.up * finalSpeedY);
     }
 
-    public void SetAsteroidSize(int size)
-    {
-        size = asteroidSize;
-    }
 
-    void Update()
-    {
-        float dynamicMaxSpeed = 3f;
-        rb.velocity = new Vector2(Mathf.Clamp(rb.velocity.x, -dynamicMaxSpeed, dynamicMaxSpeed), Mathf.Clamp(rb.velocity.y, -dynamicMaxSpeed, dynamicMaxSpeed));
-    }
 
     void OnTriggerEnter2D(Collider2D hitInfo)
     {
@@ -75,6 +80,7 @@ public class Asteroid : MonoBehaviour
                 // Spawn two medium asteroids
                 Instantiate(asteroidMedium, transform.position, transform.rotation);
                 Instantiate(asteroidMedium, transform.position, transform.rotation);
+                SetAsteroidPoints(10);
 
             }
             else if (asteroidSize == 2)
@@ -82,41 +88,41 @@ public class Asteroid : MonoBehaviour
                 // Spawn two small asteroids
                 Instantiate(asteroidSmall, transform.position, transform.rotation);
                 Instantiate(asteroidSmall, transform.position, transform.rotation);
-
+                SetAsteroidPoints(10);
             }
             else if (asteroidSize == 1)
             {
-                // Score points
+                SetAsteroidPoints(20);
             }
-            
+
+            // Score points - Senc message to player to score points
+            Player.SendMessage("Score", GetAsteroidPoints());
+
             // Destroy the asteroid
             Destroy(gameObject);
         }
 
         if (hitInfo.CompareTag("Player"))
         {
-            Debug.Log("AsteroidToPlayerCollision: " + hitInfo.name);
-            //Reduce player life or destroy player..
+            //Debug.Log("AsteroidToPlayerCollision: " + hitInfo.name);
+            // Reduce player life by 1.. 
+            Player.SendMessage("Health", 1);
         }
-    }
-
-    void OnCollisionEnter(Collision collisionInfo)
-    {
-        if (collisionInfo.collider.name == "Projectile(Clone)" || 
-            collisionInfo.collider.name == "PlayerShip")
-        {
-            // if (_generation < 3)
-            // {
-            //     CreateSmallAsteriods(2);
-            // }
-            Destroy();
-        }
-
     }
 
     public void Destroy()
     {
         Destroy(gameObject, 0.01f);
+    }
+
+    public int GetAsteroidPoints()
+    {
+        return asteroidPoints;
+    }
+
+    private void SetAsteroidPoints(int points)
+    {
+        asteroidPoints = points;
     }
 
 }

@@ -5,13 +5,24 @@ using UnityEngine.UI;
 
 public class PlayerScore : MonoBehaviour
 {
-    public GameObject Player;
     public Text scoreText;
     int score;
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
+        scoreText.text = GetLocalScore().ToString();
         
     }
+
+    public void GetPlayerScore(int updateScore)
+    {
+        score += updateScore;
+    }
+
+    public int GetLocalScore()
+    {
+        return score;
+    }
+
 }
