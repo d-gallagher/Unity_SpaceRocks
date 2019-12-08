@@ -13,15 +13,15 @@ public class Projectile : MonoBehaviour
         KillOldBullet();
     }
 
-    void OnTriggerEnter2D(Collider2D hitInfo)
-    {
-        if (hitInfo.CompareTag("asteroid"))
-        {
-            Debug.Log("Bullet Impact Asteroid: "+hitInfo.name);
-            Destroy(gameObject);
-            Destroy(hitInfo.gameObject);
-        }
-    }
+    //void OnTriggerEnter2D(Collider2D hitInfo)
+    //{
+    //    if (hitInfo.CompareTag("asteroid"))
+    //    {
+    //        Debug.Log("Bullet Impact Asteroid: "+hitInfo.name);
+    //        Destroy(gameObject);
+    //        Destroy(hitInfo.gameObject);
+    //    }
+    //}
   
       public void KillOldBullet()
     {

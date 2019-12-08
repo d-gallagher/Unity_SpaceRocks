@@ -13,8 +13,9 @@ GameObject:
   - component: {fileID: 1342846092318194050}
   - component: {fileID: 1342846092318194051}
   - component: {fileID: 1342846092318194055}
+  - component: {fileID: -3321753837748449626}
   m_Layer: 0
-  m_Name: asteroid
+  m_Name: asteroidLarge
   m_TagString: asteroid
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -29,7 +30,7 @@ Transform:
   m_GameObject: {fileID: 1342846092318194060}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 5.2, y: 1.03, z: 0}
-  m_LocalScale: {x: 0.7, y: 0.7, z: 1}
+  m_LocalScale: {x: 0.8, y: 0.8, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -132,4 +133,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 13f15a35e711c9d43bc081d27ed0d0a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  asteroid: {fileID: 1342846092318194060}
+  asteroidMedium: {fileID: 1342846092318194060, guid: 962d54641752e6e4aa4dd7b025b75e52,
+    type: 3}
+  asteroidSmall: {fileID: 1342846092318194060, guid: f3ce7adca9930c146a1759b916a28c1c,
+    type: 3}
+  rb: {fileID: 1342846092318194051}
+  asteroidSize: 3
+--- !u!114 &-3321753837748449626
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1342846092318194060}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cff2cde8252c5df4ba9f581293f86b4e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

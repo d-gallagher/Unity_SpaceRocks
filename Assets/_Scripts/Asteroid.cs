@@ -5,26 +5,33 @@ using UnityEngine;
 public class Asteroid : MonoBehaviour
 {
     // Asteroid obj
-    public GameObject asteroid;
+    public GameObject asteroidMedium;
+    public GameObject asteroidSmall;
+    public Rigidbody2D rb;
     // Rotation values
     private float maxRotation;
     private float rotationZ;
-    private Rigidbody2D rb;
     private Camera mainCam;
-    private float maxSpeed;
-    // Generation to track asteroid age
-    private int _generation;
+
+    // Track if Large(3), Med(2), Small(1) Asteroid
+    public int asteroidSize;
 
     void Start()
     {
-
         mainCam = Camera.main;
+        MoveAsteroid();
+        RotateAsteroid();
+    }
 
+    public void RotateAsteroid()
+    {
+        // Set rotation z axis for asteroids
         maxRotation = 25f;
         rotationZ = Random.Range(-maxRotation, maxRotation);
-
-        rb = asteroid.GetComponent<Rigidbody2D>();
-
+    }
+    public void MoveAsteroid()
+    {
+        // asteroid velocity in x axis - select pos/neg direction - add force
         float speedX = Random.Range(200f, 800f);
         int selectorX = Random.Range(0, 2);
         float dirX = 0;
@@ -33,6 +40,7 @@ public class Asteroid : MonoBehaviour
         float finalSpeedX = speedX * dirX;
         rb.AddForce(transform.right * finalSpeedX);
 
+        // asteroid velocity in y axis - select pos/neg direction - add force
         float speedY = Random.Range(200f, 800f);
         int selectorY = Random.Range(0, 2);
         float dirY = 0;
@@ -40,33 +48,56 @@ public class Asteroid : MonoBehaviour
         else { dirY = 1; }
         float finalSpeedY = speedY * dirY;
         rb.AddForce(transform.up * finalSpeedY);
-
     }
 
-    public void SetGeneration(int generation)
+    public void SetAsteroidSize(int size)
     {
-        _generation = generation;
+        size = asteroidSize;
     }
 
     void Update()
     {
-        
-        CheckPosition();
         float dynamicMaxSpeed = 3f;
         rb.velocity = new Vector2(Mathf.Clamp(rb.velocity.x, -dynamicMaxSpeed, dynamicMaxSpeed), Mathf.Clamp(rb.velocity.y, -dynamicMaxSpeed, dynamicMaxSpeed));
     }
 
     void OnTriggerEnter2D(Collider2D hitInfo)
     {
-        //if (hitInfo.CompareTag("projectile")){
-        //    Debug.Log("AsteroidDestroyedBy: " + hitInfo.name);
-        //    Destroy(gameObject);
-        //}
-        //if (hitInfo.CompareTag("Player"))
-        //{
-        //    Debug.Log("AsteroidToPlayerCollision: " + hitInfo.name);
-        //    //Reduce player life or destroy player..
-        //}
+        // Check for collision with projectile
+        if (hitInfo.CompareTag("projectile"))
+        {
+            // Destroy the projectile
+            Destroy(hitInfo.gameObject);
+
+            // Check the size of the asteroid and split into smaller chunks
+            if (asteroidSize == 3)
+            {
+                // Spawn two medium asteroids
+                Instantiate(asteroidMedium, transform.position, transform.rotation);
+                Instantiate(asteroidMedium, transform.position, transform.rotation);
+
+            }
+            else if (asteroidSize == 2)
+            {
+                // Spawn two small asteroids
+                Instantiate(asteroidSmall, transform.position, transform.rotation);
+                Instantiate(asteroidSmall, transform.position, transform.rotation);
+
+            }
+            else if (asteroidSize == 1)
+            {
+                // Score points
+            }
+            
+            // Destroy the asteroid
+            Destroy(gameObject);
+        }
+
+        if (hitInfo.CompareTag("Player"))
+        {
+            Debug.Log("AsteroidToPlayerCollision: " + hitInfo.name);
+            //Reduce player life or destroy player..
+        }
     }
 
     void OnCollisionEnter(Collision collisionInfo)
@@ -81,67 +112,11 @@ public class Asteroid : MonoBehaviour
             Destroy();
         }
 
-        // if (collisionInfo.collider.name == "asteroidet")
-        // {
-        //     gameplay.asteroidetFail();
-        // }
-    }
-
-    // void CreateSmallAsteriods(int asteroidsNum)
-    // {
-    //     int newGeneration = _generation + 1;
-    //     for (int i = 1; i <= asteroidsNum; i++)
-    //     {
-    //         float scaleSize = 0.5f;
-    //         GameObject AsteroidClone = Instantiate(asteroid, new Vector3(transform.position.x, transform.position.y, 0f), transform.rotation);
-    //         AsteroidClone.transform.localScale = new Vector3(AsteroidClone.transform.localScale.x * scaleSize, AsteroidClone.transform.localScale.y * scaleSize, AsteroidClone.transform.localScale.z * scaleSize);
-    //         AsteroidClone.GetComponent<>().SetGeneration(newGeneration);
-    //         AsteroidClone.SetActive(true);
-    //     }
-    // }
-
-  private void CheckPosition()
-    {
-        // Set screen size
-        float sceneWidth = mainCam.orthographicSize * 2 * mainCam.aspect;
-        float sceneHeight = mainCam.orthographicSize * 2;
-        // Set screen edges
-        float sceneRightEdge = sceneWidth / 2;
-        float sceneLeftEdge = sceneRightEdge * -1;
-        float sceneTopEdge = sceneHeight / 2;
-        float sceneBottomEdge = sceneTopEdge * -1;
-
-        // Check if ship is in boundary, flip to opposite edge 
-        if (transform.position.x > sceneRightEdge)
-        {
-            transform.position = new Vector2(sceneLeftEdge, transform.position.y);
-        }
-
-        if (transform.position.x < sceneLeftEdge)        
-        { 
-            transform.position = new Vector2(sceneRightEdge, transform.position.y); 
-        } 
-        
-        if (transform.position.y > sceneTopEdge)
-        {
-            transform.position = new Vector2(transform.position.x, sceneBottomEdge);
-        }
-
-        if (transform.position.y < sceneBottomEdge)
-        {
-            transform.position = new Vector2(transform.position.x, sceneTopEdge);
-        }
     }
 
     public void Destroy()
     {
-        // gameplay.asterodDestroyed();
         Destroy(gameObject, 0.01f);
     }
-
-    // public void DestroySilent()
-    // {
-    //     Destroy(gameObject, 0.00f);
-    // }
 
 }
