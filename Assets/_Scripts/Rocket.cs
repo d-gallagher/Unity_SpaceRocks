@@ -11,7 +11,7 @@ public class Rocket : MonoBehaviour
     public Rigidbody2D rb;
 
     // Keep track of Score
-    public int gameScore;
+    public int gameScore = 0;
     public Text scoreText;
 
     // Keep track of Health
@@ -27,7 +27,6 @@ public class Rocket : MonoBehaviour
     private void Start()
     {
         mainCam = Camera.main;
-        gameScore = 0;
         rocketHealth = 3;
     }
 
@@ -43,7 +42,11 @@ public class Rocket : MonoBehaviour
     void Score(int asteroidPoints)
     {
         gameScore += asteroidPoints;
+        Debug.Log("Asteroid Points Message Recieved: " + asteroidPoints);
+        Debug.Log("Current GameScore Value: " + gameScore);
+        Debug.Log("Current GetLocalScore Value: " + GetLocalScore());
     }
+
     // Get the local gamescore variable for display in UI
     public int GetLocalScore()
     {
@@ -80,5 +83,6 @@ public class Rocket : MonoBehaviour
     void Health (int updateHealth)
     {
         rocketHealth -= updateHealth;
+        //Debug.Log("Asteroid Health Message Recieved: " + updateHealth);
     }
 }
