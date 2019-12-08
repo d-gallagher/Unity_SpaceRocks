@@ -67,6 +67,7 @@ public class EnemyShip : MonoBehaviour
         // Check for collision with projectile
         if (hitInfo.CompareTag("projectile"))
         {
+            health--;
             // Destroy the projectile
             Destroy(hitInfo.gameObject);
             // If Ship health is Zero, destroy the ship

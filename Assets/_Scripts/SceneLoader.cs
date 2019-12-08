@@ -47,10 +47,15 @@ public class SceneLoader : MonoBehaviour
     //    sceneOrder.Add("End_Game"     , 9);
     //}
 
-    //string GetCurrentScene()
-    //{
-    //    return SceneManager.GetActiveScene().name;
-    //}
+    public void LoadScene2()
+    {
+        SceneManager.LoadScene(SceneManager.GetSceneByName("Game_Level2").buildIndex);
+    }
+
+    public void LoadScene3()
+    {
+        SceneManager.LoadScene(SceneManager.GetSceneByName("Game_Level3").buildIndex);
+    }
 
     //int GetNextScene()
     //{

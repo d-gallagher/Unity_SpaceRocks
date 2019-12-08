@@ -8,9 +8,13 @@ public class GamePlay : MonoBehaviour
     // Get reference to asteroid/Enemy to spawn in game
     public GameObject asteroid;
     public GameObject enemyShip;
-
+    // Hold asteroids/enemies in scene to check for level complete
+    GameObject[] asteroids;
+    GameObject[] enemyShips;
     // Get reference to current scene
     string currentSceneName;
+    // Enable Progress menu when level complete
+    public GameObject progressMenuUI;
 
     // Start is called before the first frame update
     void Start()
@@ -30,7 +34,7 @@ public class GamePlay : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        CompleteLevel();
     }
 
     private void CreateAsteroids(float asteroidsNum)
@@ -47,5 +51,28 @@ public class GamePlay : MonoBehaviour
         {
             GameObject Enemy = Instantiate(enemyShip, new Vector2(Random.Range(-10, 10), 6f), transform.rotation);
         }
+    }
+
+    private void CompleteLevel()
+    {
+        asteroids = GameObject.FindGameObjectsWithTag("asteroid");
+        enemyShips = GameObject.FindGameObjectsWithTag("enemy");
+        if (asteroids.Length == 0 && currentSceneName.Equals("Game_Level1"))
+        {
+            //Level Complete
+            // Stop time in game scene
+            Time.timeScale = 0f;
+            // Set the progress menu to active
+            progressMenuUI.SetActive(true);
+        }
+        else if (asteroids.Length == 0 && enemyShips.Length == 0)
+        {
+            //Level Complete
+            // Stop time in game scene
+            Time.timeScale = 0f;
+            // Set the progress menu to active
+            progressMenuUI.SetActive(true);
+        }
+        //Debug.Log("Asteroids In Scene: "+asteroids.Length); 
     }
 }

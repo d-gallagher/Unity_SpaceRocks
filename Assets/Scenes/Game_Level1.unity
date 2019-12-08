@@ -2278,8 +2278,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1832267566}
-        m_MethodName: PlayGame
+      - m_Target: {fileID: 1832267567}
+        m_MethodName: LoadScene2
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2701,7 +2701,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: dc619cc220758d74e90600abdf83d158, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.356
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -3761,6 +3761,7 @@ MonoBehaviour:
     type: 3}
   enemyShip: {fileID: 1972017165614598643, guid: 366e8ef836dbfd542b6b2e1f21eb4c54,
     type: 3}
+  progressMenuUI: {fileID: 1832267564}
 --- !u!4 &1068144206
 Transform:
   m_ObjectHideFlags: 0
@@ -5149,6 +5150,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1832267565}
   - component: {fileID: 1832267566}
+  - component: {fileID: 1832267567}
   m_Layer: 5
   m_Name: ProgressLevelMenu
   m_TagString: Untagged
@@ -5190,6 +5192,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 716419079291c4d4cbb9a344fe7bf4f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1832267567
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1832267564}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5dd0f476852f33349a1905370a509219, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  progressBar: {fileID: 0}
 --- !u!1 &1833607398
 GameObject:
   m_ObjectHideFlags: 0
