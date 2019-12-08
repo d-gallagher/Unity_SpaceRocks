@@ -46,7 +46,7 @@ public class Asteroid : MonoBehaviour
     public void MoveAsteroid()
     {
         // asteroid velocity in x axis - select pos/neg direction - add force
-        float speedX = Random.Range(200f, 400f);
+        float speedX = Random.Range(50f, 200f);
         int selectorX = Random.Range(0, 2);
         float dirX = 0;
         if (selectorX == 1) { dirX = -1; }
@@ -55,7 +55,7 @@ public class Asteroid : MonoBehaviour
         rb.AddForce(transform.right * finalSpeedX);
 
         // asteroid velocity in y axis - select pos/neg direction - add force
-        float speedY = Random.Range(200f, 400f);
+        float speedY = Random.Range(50f, 200f);
         int selectorY = Random.Range(0, 2);
         float dirY = 0;
         if (selectorY == 1) { dirY = -1; }
