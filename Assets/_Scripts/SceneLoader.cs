@@ -23,7 +23,7 @@ public class SceneLoader : MonoBehaviour
     IEnumerator LoadAsyncOperation()
     {
         // Fill the progress bar while waiting for next scene to load, then load scene
-        AsyncOperation gameLevel = SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().buildIndex + 1);
+        AsyncOperation gameLevel = SceneManager.LoadSceneAsync(SceneManager.GetSceneByName("LoadingScene").buildIndex);
         // Check progress of load scene operation (1 = complete)
         while (gameLevel.progress < 1)
         {
