@@ -22,51 +22,14 @@ public class SceneLoader : MonoBehaviour
 
     IEnumerator LoadAsyncOperation()
     {
-        //if (currentScene.Equals("StartMenu"))
-        //{
-            // Fill the progress bar while waiting for next scene to load, then load scene
-            AsyncOperation gameLevel = SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().buildIndex + 1);
-            // Check progress of load scene operation (1 = complete)
-            while (gameLevel.progress < 1)
-            {
-                progressBar.fillAmount = gameLevel.progress;
-                yield return new WaitForEndOfFrame();
-            }
-        //}
-        //if (currentScene.Equals("Game_Level1"))
-        //{
-        //    // Fill the progress bar while waiting for next scene to load, then load scene
-        //    AsyncOperation gameLevel = SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().buildIndex + 1);
-        //    // Check progress of load scene operation (1 = complete)
-        //    while (gameLevel.progress < 1)
-        //    {
-        //        progressBar.fillAmount = gameLevel.progress;
-        //        yield return new WaitForEndOfFrame();
-        //    }
-        //}
-        //if (currentScene.Equals("Game_Level2"))
-        //{
-        //    // Fill the progress bar while waiting for next scene to load, then load scene
-        //    AsyncOperation gameLevel = SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().buildIndex + 1);
-        //    // Check progress of load scene operation (1 = complete)
-        //    while (gameLevel.progress < 1)
-        //    {
-        //        progressBar.fillAmount = gameLevel.progress;
-        //        yield return new WaitForEndOfFrame();
-        //    }
-        //}
-        //if (currentScene.Equals("Game_Level3"))
-        //{
-        //    // Fill the progress bar while waiting for next scene to load, then load scene
-        //    AsyncOperation gameLevel = SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().buildIndex + 1);
-        //    // Check progress of load scene operation (1 = complete)
-        //    while (gameLevel.progress < 1)
-        //    {
-        //        progressBar.fillAmount = gameLevel.progress;
-        //        yield return new WaitForEndOfFrame();
-        //    }
-        //}
-
+        // Fill the progress bar while waiting for next scene to load, then load scene
+        AsyncOperation gameLevel = SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().buildIndex + 1);
+        // Check progress of load scene operation (1 = complete)
+        while (gameLevel.progress < 1)
+        {
+            progressBar.fillAmount = gameLevel.progress;
+            yield return new WaitForEndOfFrame();
+        }
 
     }
 
@@ -86,12 +49,12 @@ public class SceneLoader : MonoBehaviour
 
     public void LoadScene2()
     {
-        SceneManager.LoadScene(SceneManager.GetSceneByName("Game_Level2").buildIndex);
+        SceneManager.LoadScene(3);
     }
 
     public void LoadScene3()
     {
-        SceneManager.LoadScene(SceneManager.GetSceneByName("Game_Level3").buildIndex);
+        SceneManager.LoadScene(4);
     }
 
     //int GetNextScene()

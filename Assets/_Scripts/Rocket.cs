@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class Rocket : MonoBehaviour
@@ -19,6 +20,7 @@ public class Rocket : MonoBehaviour
     public int healthStars;
 
     // Health UI
+    public GameObject deathMenuUI;
     public Image[] stars;
     public Sprite fullStar;
     public Sprite emptyStar;
@@ -40,15 +42,16 @@ public class Rocket : MonoBehaviour
         scoreText.text = GetLocalScore().ToString();
         // Update UI for Health Display - Move out of rocket script
         DisplayHealth();
+        RocketDeath();
     }
 
     // Keep a tally of the score
     void Score(int asteroidPoints)
     {
         gameScore += asteroidPoints;
-        Debug.Log("Asteroid Points Message Recieved: " + asteroidPoints);
-        Debug.Log("Current GameScore Value: " + gameScore);
-        Debug.Log("Current GetLocalScore Value: " + GetLocalScore());
+        //Debug.Log("Asteroid Points Message Recieved: " + asteroidPoints);
+        //Debug.Log("Current GameScore Value: " + gameScore);
+        //Debug.Log("Current GetLocalScore Value: " + GetLocalScore());
     }
 
     // Get the local gamescore variable for display in UI
@@ -88,5 +91,16 @@ public class Rocket : MonoBehaviour
     {
         rocketHealth -= updateHealth;
         //Debug.Log("Asteroid Health Message Recieved: " + updateHealth);
+    }
+
+    public void RocketDeath()
+    {
+        if (rocketHealth == 0)
+        {
+            // Game Over Menu       
+            Time.timeScale = 0f;
+            deathMenuUI.SetActive(true);
+
+        }
     }
 }
