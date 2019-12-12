@@ -7,6 +7,8 @@ public class MusicManager : MonoBehaviour
     // Create an instance of the Musinc Mnager and persist through game levels
     private static MusicManager instance;
 
+    // Get reference to the volume Sliders
+
     void Awake()
     {
         if (instance == null)
@@ -19,4 +21,8 @@ public class MusicManager : MonoBehaviour
             Destroy(gameObject);
         }
     }
+
+    // Master Volume
+    // Music Volume
+    // Effects Volume
 }

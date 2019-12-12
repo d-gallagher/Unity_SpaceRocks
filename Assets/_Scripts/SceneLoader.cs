@@ -6,11 +6,11 @@ using UnityEngine.UI;
 
 public class SceneLoader : MonoBehaviour
 {
-    //string currentScene = SceneManager.GetActiveScene().name;
+    string currentScene = SceneManager.GetActiveScene().name;
     //int nextScene;
 
     //private Dictionary<string, int> sceneOrder = new Dictionary<string, int>();
-    
+
 
     public Image progressBar;
     // Start is called before the first frame update
@@ -22,14 +22,51 @@ public class SceneLoader : MonoBehaviour
 
     IEnumerator LoadAsyncOperation()
     {
-        // Fill the progress bar while waiting for next scene to load, then load scene
-        AsyncOperation gameLevel = SceneManager.LoadSceneAsync(SceneManager.GetSceneByName("LoadingScene").buildIndex);
-        // Check progress of load scene operation (1 = complete)
-        while (gameLevel.progress < 1)
-        {
-            progressBar.fillAmount = gameLevel.progress;
-            yield return new WaitForEndOfFrame();            
-        }
+        //if (currentScene.Equals("StartMenu"))
+        //{
+            // Fill the progress bar while waiting for next scene to load, then load scene
+            AsyncOperation gameLevel = SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().buildIndex + 1);
+            // Check progress of load scene operation (1 = complete)
+            while (gameLevel.progress < 1)
+            {
+                progressBar.fillAmount = gameLevel.progress;
+                yield return new WaitForEndOfFrame();
+            }
+        //}
+        //if (currentScene.Equals("Game_Level1"))
+        //{
+        //    // Fill the progress bar while waiting for next scene to load, then load scene
+        //    AsyncOperation gameLevel = SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().buildIndex + 1);
+        //    // Check progress of load scene operation (1 = complete)
+        //    while (gameLevel.progress < 1)
+        //    {
+        //        progressBar.fillAmount = gameLevel.progress;
+        //        yield return new WaitForEndOfFrame();
+        //    }
+        //}
+        //if (currentScene.Equals("Game_Level2"))
+        //{
+        //    // Fill the progress bar while waiting for next scene to load, then load scene
+        //    AsyncOperation gameLevel = SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().buildIndex + 1);
+        //    // Check progress of load scene operation (1 = complete)
+        //    while (gameLevel.progress < 1)
+        //    {
+        //        progressBar.fillAmount = gameLevel.progress;
+        //        yield return new WaitForEndOfFrame();
+        //    }
+        //}
+        //if (currentScene.Equals("Game_Level3"))
+        //{
+        //    // Fill the progress bar while waiting for next scene to load, then load scene
+        //    AsyncOperation gameLevel = SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().buildIndex + 1);
+        //    // Check progress of load scene operation (1 = complete)
+        //    while (gameLevel.progress < 1)
+        //    {
+        //        progressBar.fillAmount = gameLevel.progress;
+        //        yield return new WaitForEndOfFrame();
+        //    }
+        //}
+
 
     }
 
